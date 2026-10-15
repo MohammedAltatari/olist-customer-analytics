@@ -12,3 +12,6 @@ __pycache__/
 # Windows
 Thumbs.db
 desktop.ini
+
+# Query result exports (regenerated anytime)
+data/output/
