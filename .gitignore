@@ -1,0 +1,14 @@
+# Raw data - download from Kaggle (see README)
+data/raw/
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+
+# Secrets
+.env
+
+# Windows
+Thumbs.db
+desktop.ini
