@@ -1,0 +1,60 @@
+// =========================================================
+// 3.1_model_checks.dax
+// Run in Power BI Desktop -> DAX query view -> Run (all queries)
+// Each result must match sql/09_powerbi_model_checks.sql
+// =========================================================
+
+// 1) Relationships as Power BI stores them
+EVALUATE
+SELECTCOLUMNS (
+    INFO.VIEW.RELATIONSHIPS (),
+    "From", [FromTable] & "[" & [FromColumn] & "]",
+    "To", [ToTable] & "[" & [ToColumn] & "]",
+    "Cardinality", [FromCardinality] & " : " & [ToCardinality],
+    "Direction", [CrossFilteringBehavior],
+    "Active", [IsActive]
+)
+ORDER BY [From]
+
+// 2) Row counts (must match SQL result 2)
+EVALUATE
+{
+    ( "DimDate",          COUNTROWS ( DimDate ) ),
+    ( "DimGeography",     COUNTROWS ( DimGeography ) ),
+    ( "DimCustomer",      COUNTROWS ( DimCustomer ) ),
+    ( "DimProduct",       COUNTROWS ( DimProduct ) ),
+    ( "DimSeller",        COUNTROWS ( DimSeller ) ),
+    ( "FactOrders",       COUNTROWS ( FactOrders ) ),
+    ( "FactOrderItems",   COUNTROWS ( FactOrderItems ) ),
+    ( "FactPayments",     COUNTROWS ( FactPayments ) ),
+    ( "CustomerSegments", COUNTROWS ( CustomerSegments ) ),
+    ( "CohortActivity",   COUNTROWS ( CohortActivity ) ),
+    ( "MonthlyKPIs",      COUNTROWS ( MonthlyKPIs ) )
+}
+
+// 3) Revenue by segment through the relationships (must match SQL result 4)
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[segment],
+    "customers", CALCULATE ( DISTINCTCOUNT ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () ),
+    "revenue",   CALCULATE ( SUM ( FactOrders[items_value] ), FactOrders[is_delivered] = TRUE () )
+)
+ORDER BY [revenue] DESC
+
+// 4) Revenue by year through DimDate (must match SQL result 5)
+EVALUATE
+SUMMARIZECOLUMNS (
+    DimDate[year],
+    "delivered_orders", CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[is_delivered] = TRUE () ),
+    "revenue",          CALCULATE ( SUM ( FactOrders[items_value] ), FactOrders[is_delivered] = TRUE () )
+)
+ORDER BY DimDate[year]
+
+// 5) Cohort customers by segment (must match SQL result 6)
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[segment],
+    "cohort_customers", DISTINCTCOUNT ( CohortActivity[customer_key] ),
+    "cohort_rows",      COUNTROWS ( CohortActivity )
+)
+ORDER BY [cohort_customers] DESC
