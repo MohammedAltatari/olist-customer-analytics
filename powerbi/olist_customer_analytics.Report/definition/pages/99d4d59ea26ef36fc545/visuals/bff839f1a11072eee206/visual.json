@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "bff839f1a11072eee206",
+  "position": {
+    "x": 20,
+    "y": 900,
+    "z": 6,
+    "height": 160,
+    "width": 1880,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 1: Product category is the clearest signal of a second purchase - in the model data, first orders in sports_leisure return at 2.08% vs. 0.67% for auto (~3x).",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 2: 30,469 current customers have not returned yet; Group A (1,523) is the first list for a second-purchase offer, followed by Group B (4,570).",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 3: The biggest levers are operational - contact customers in the first 30 days after delivery and make sure their first order arrives on time.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

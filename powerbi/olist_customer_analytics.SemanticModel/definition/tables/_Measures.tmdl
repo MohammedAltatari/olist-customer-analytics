@@ -145,6 +145,30 @@ table _Measures
 		formatString: 0.0
 		lineageTag: dce79c70-7127-470a-b6a0-9636429da532
 
+	measure 'Scored Customers' = CALCULATE ( COUNTROWS ( CustomerSegments ), CustomerSegments[is_scored] = 1 )
+		formatString: #,0
+		lineageTag: 7d3c107a-6112-4c0d-8f28-ed81f71aba1d
+
+	measure 'Category Customers' = CALCULATE ( DISTINCTCOUNT ( FactOrderItems[customer_key] ), FactOrderItems[is_delivered] = TRUE () )
+		formatString: #,0
+		lineageTag: d2e55f40-2297-4f06-a567-f77e7944cc4f
+
+	measure 'Category Returning %' =
+			// of the customers who bought in the selected category,
+			// the share who bought again on a different day (any category)
+			VAR CategoryCustomers =
+			    CALCULATETABLE ( VALUES ( FactOrderItems[customer_key] ), FactOrderItems[is_delivered] = TRUE () )
+			VAR Returning =
+			    CALCULATE (
+			        [Returning Customers],
+			        TREATAS ( CategoryCustomers, DimCustomer[customer_key] ),
+			        REMOVEFILTERS ( DimProduct )
+			    )
+			RETURN
+			    DIVIDE ( Returning, COUNTROWS ( CategoryCustomers ) )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 72753fc7-8621-4220-8026-4074f0753f2f
+
 	partition _Measures = m
 		mode: import
 		source =

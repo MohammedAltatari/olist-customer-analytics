@@ -1,0 +1,214 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "7f90b735e90bd4c28247",
+  "position": {
+    "x": 840,
+    "y": 420,
+    "z": 5,
+    "height": 460,
+    "width": 1060,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "customer_unique_id"
+                }
+              },
+              "queryRef": "CustomerSegments.customer_unique_id",
+              "nativeQueryRef": "customer_unique_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "priority_group"
+                }
+              },
+              "queryRef": "CustomerSegments.priority_group",
+              "nativeQueryRef": "priority_group"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "rank_pct"
+                }
+              },
+              "queryRef": "CustomerSegments.rank_pct",
+              "nativeQueryRef": "rank_pct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "first_main_category"
+                }
+              },
+              "queryRef": "CustomerSegments.first_main_category",
+              "nativeQueryRef": "first_main_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "segment"
+                }
+              },
+              "queryRef": "CustomerSegments.segment",
+              "nativeQueryRef": "segment"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "customer_state"
+                }
+              },
+              "queryRef": "CustomerSegments.customer_state",
+              "nativeQueryRef": "customer_state"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CustomerSegments"
+                    }
+                  },
+                  "Property": "days_since_first"
+                }
+              },
+              "queryRef": "CustomerSegments.days_since_first",
+              "nativeQueryRef": "days_since_first"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "CustomerSegments"
+                  }
+                },
+                "Property": "rank_pct"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Priority list - current customers ranked by the model (rank 1 = most likely to return)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "218aad9e412222c958ce",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CustomerSegments"
+              }
+            },
+            "Property": "is_scored"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "CustomerSegments",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "f"
+                        }
+                      },
+                      "Property": "is_scored"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

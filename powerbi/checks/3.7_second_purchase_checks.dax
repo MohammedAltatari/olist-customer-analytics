@@ -1,0 +1,42 @@
+// =========================================================
+// 3.7_second_purchase_checks.dax
+// Run in Power BI Desktop -> DAX query view -> Run
+// Expected values: data/output/08_ml_views_results.txt + Olist_04 insights 19-21
+// =========================================================
+
+// Check 1: priority groups
+// Expected: A - top 5% = 1,523 | B - top 6-20% = 4,570 | C - rest = 24,376
+//           total 30,469 | rank_pct: A <= 5, B 5-20, C > 20
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[priority_group],
+    FILTER ( ALL ( CustomerSegments[priority_group] ), NOT ISBLANK ( CustomerSegments[priority_group] ) ),
+    "Customers", [Scored Customers],
+    "Min rank_pct", MIN ( CustomerSegments[rank_pct] ),
+    "Max rank_pct", MAX ( CustomerSegments[rank_pct] )
+)
+ORDER BY CustomerSegments[priority_group]
+
+// Check 2: totals
+// Expected: Scored 30,469 | Returning across all categories = 2,015
+EVALUATE
+ROW (
+    "Scored Customers", [Scored Customers],
+    "Returning (no category filter)", [Returning Customers],
+    "Category Returning % (all)", ROUND ( [Category Returning %] * 100, 2 )
+)
+
+// Check 3: return rate by category (15 largest categories by customers)
+// Sanity check vs. Python (first-order category): sports_leisure / bed_bath_table
+// should be among the higher ones, auto / toys among the lower ones.
+EVALUATE
+TOPN (
+    15,
+    SUMMARIZECOLUMNS (
+        DimProduct[category_en],
+        "Category Customers", [Category Customers],
+        "Returning %", ROUND ( [Category Returning %] * 100, 2 )
+    ),
+    [Category Customers], DESC
+)
+ORDER BY [Returning %] DESC
