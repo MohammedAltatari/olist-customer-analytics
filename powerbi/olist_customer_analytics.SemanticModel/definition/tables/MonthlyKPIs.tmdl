@@ -1,0 +1,91 @@
+table MonthlyKPIs
+	lineageTag: e595ed55-3720-44d5-88a4-5fa69c9f2565
+
+	column purchase_month
+		dataType: string
+		lineageTag: 41530f22-98fa-4ff0-8355-8e327b1d89fb
+		summarizeBy: none
+		sourceColumn: purchase_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: ce435b47-f2e8-431d-8b1d-fffa8d1f0141
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column customers
+		dataType: int64
+		formatString: 0
+		lineageTag: e01e274a-dbc3-4fd9-a922-cae947d6207a
+		summarizeBy: sum
+		sourceColumn: customers
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		lineageTag: d1cf0ddf-d58b-4d0e-bc2f-0b2d491d58f8
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_order_value
+		dataType: double
+		lineageTag: 200e6d53-2a31-495c-8cc6-d7db688e028b
+		summarizeBy: sum
+		sourceColumn: avg_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column new_customers
+		dataType: int64
+		formatString: 0
+		lineageTag: d93e2fb2-559f-4c2e-9b94-8adbf4f09ff5
+		summarizeBy: sum
+		sourceColumn: new_customers
+
+		annotation SummarizationSetBy = Automatic
+
+	column late_rate_pct
+		dataType: double
+		lineageTag: cf5e6aec-e6dd-403f-bb23-ada0fbb4bf9c
+		summarizeBy: sum
+		sourceColumn: late_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_review_score
+		dataType: double
+		lineageTag: 9d5108fd-8cd4-46c8-b07a-9ac535c0dfd9
+		summarizeBy: sum
+		sourceColumn: avg_review_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition MonthlyKPIs = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "rpt", Item = "vw_MonthlyKPIs"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

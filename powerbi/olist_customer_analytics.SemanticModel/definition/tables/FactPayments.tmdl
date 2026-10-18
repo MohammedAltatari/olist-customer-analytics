@@ -1,0 +1,78 @@
+table FactPayments
+	lineageTag: d422d17e-9e7f-490a-ad52-f819c6868498
+
+	column order_id
+		dataType: string
+		lineageTag: bae858ef-5f51-449f-9a04-804e182ac258
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_sequential
+		dataType: int64
+		formatString: 0
+		lineageTag: ac628b94-cbdc-4063-8d0b-0cb92b8a2c14
+		summarizeBy: sum
+		sourceColumn: payment_sequential
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 12c61d97-a4ed-475e-81a2-7e537f7fb456
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: c6ff1d71-26a9-43f6-97df-5222791fb637
+		summarizeBy: none
+		sourceColumn: purchase_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_type
+		dataType: string
+		lineageTag: d5fad472-cfc2-482a-b44c-7236f2ef6947
+		summarizeBy: none
+		sourceColumn: payment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_installments
+		dataType: int64
+		formatString: 0
+		lineageTag: e5fb4ad7-276a-477b-be06-4ab007a4d13b
+		summarizeBy: sum
+		sourceColumn: payment_installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_value
+		dataType: double
+		lineageTag: a0e79935-02f2-4174-8b17-acc2df706c1d
+		summarizeBy: sum
+		sourceColumn: payment_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactPayments = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "dw", Item = "FactPayments"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,66 @@
+table DimSeller
+	lineageTag: 60fb51f4-e8ca-4a9b-9bea-d6b0396b102a
+
+	column seller_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f0705c79-196f-4ff7-9944-9bf723512268
+		summarizeBy: none
+		sourceColumn: seller_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		lineageTag: 9a200452-c63c-4281-9585-70f44541d73a
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 1381c6d1-4d64-4b47-ab7d-3567b8a328f3
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: b5c2367f-c7d2-4513-a251-bcbe01457bc9
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 700fd4dc-4938-4f1e-95a7-1f00a2b420de
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column geography_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e4ae9887-b89d-4c9c-9bf0-bd12e2160015
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimSeller = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "dw", Item = "DimSeller"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

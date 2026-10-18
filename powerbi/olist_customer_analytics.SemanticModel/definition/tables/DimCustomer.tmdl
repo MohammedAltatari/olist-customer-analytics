@@ -1,0 +1,66 @@
+table DimCustomer
+	lineageTag: 591e2149-2af0-4721-9b21-2cc41d142afd
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: fb566674-3f35-4e29-821b-5dd51cffc0bd
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 51e8b169-83e1-4068-bbd5-f8ea1fc7fb20
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 29b59b56-722c-4c0c-a6c4-581312505dc4
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: dbe5da99-574c-4cc2-807c-67fa29315c5c
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: fbd432aa-d2b4-47bc-b908-81d76e4f77d3
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column geography_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b0ce9ee-9461-4878-9d70-5a0f55e0b892
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCustomer = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "dw", Item = "DimCustomer"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

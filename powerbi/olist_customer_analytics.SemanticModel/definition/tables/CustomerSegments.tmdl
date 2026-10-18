@@ -1,0 +1,227 @@
+table CustomerSegments
+	lineageTag: eac845ad-ca06-4bd9-ab53-2b34c71cdd3e
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: dd21892d-8015-4ec5-b9e5-9c7f1263dc24
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 599d9c25-70b5-4876-a5a7-e971774f3e31
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_state
+		dataType: string
+		lineageTag: 593af4b5-6c6e-4a61-9deb-d33aed4b8b1e
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_city
+		dataType: string
+		lineageTag: 2a430c32-4cd1-4abd-982e-894c9cbadb24
+		summarizeBy: none
+		sourceColumn: customer_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshot_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5a0df9a2-7e97-4bfe-83c7-99b86715fdd2
+		summarizeBy: none
+		sourceColumn: snapshot_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_purchase
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 242a16b2-8720-42da-acdd-5a11d503b5a5
+		summarizeBy: none
+		sourceColumn: first_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_purchase
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7385ff81-dd4d-47a2-b533-7f325c608208
+		summarizeBy: none
+		sourceColumn: last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column recency_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 0066f788-9f81-4bec-a71e-ba1cc8b6d9f3
+		summarizeBy: sum
+		sourceColumn: recency_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ab9f5d0-fba5-41b3-81c2-7a12f3de5f6c
+		summarizeBy: sum
+		sourceColumn: purchase_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f1dc5b3-03ce-41fb-8c3a-a8f714b2ca6a
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column monetary
+		dataType: double
+		lineageTag: b7cb2609-39aa-4a58-b79c-2cdb551f2442
+		summarizeBy: sum
+		sourceColumn: monetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column R
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c7ff740-4f37-4189-894a-10baa1dcc798
+		summarizeBy: sum
+		sourceColumn: R
+
+		annotation SummarizationSetBy = Automatic
+
+	column F
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ca1e766-c39a-445a-9957-e2ed5e02bd4b
+		summarizeBy: sum
+		sourceColumn: F
+
+		annotation SummarizationSetBy = Automatic
+
+	column M
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f5d18f0-e6ad-4cac-926c-02f6fd77fef2
+		summarizeBy: sum
+		sourceColumn: M
+
+		annotation SummarizationSetBy = Automatic
+
+	column RFM_code
+		dataType: string
+		lineageTag: 29ed46d8-f9fa-4dcf-b806-6b13bb029727
+		summarizeBy: none
+		sourceColumn: RFM_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment
+		dataType: string
+		lineageTag: a306adca-906b-4267-bc38-cb4051e810fa
+		summarizeBy: none
+		sourceColumn: segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster
+		dataType: int64
+		formatString: 0
+		lineageTag: c933abe4-0229-440a-a127-cea7a8cc12ba
+		summarizeBy: sum
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_name
+		dataType: string
+		lineageTag: 7c469755-d425-4d95-9519-d99820fbf0d7
+		summarizeBy: none
+		sourceColumn: cluster_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_main_category
+		dataType: string
+		lineageTag: fe2a1b72-658b-431e-a4bd-a7231734ca16
+		summarizeBy: none
+		sourceColumn: first_main_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_first
+		dataType: int64
+		formatString: 0
+		lineageTag: b4b23c0a-9446-445c-96f9-6e053b11ce8d
+		summarizeBy: sum
+		sourceColumn: days_since_first
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_probability
+		dataType: double
+		lineageTag: cb122c4c-1ab6-4001-8efa-b9898865a548
+		summarizeBy: sum
+		sourceColumn: return_probability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rank_pct
+		dataType: double
+		lineageTag: 408dee93-d6eb-4345-a151-a229178321d0
+		summarizeBy: sum
+		sourceColumn: rank_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column priority_group
+		dataType: string
+		lineageTag: dbaa077c-d9f2-4669-a003-ed708a904a39
+		summarizeBy: none
+		sourceColumn: priority_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_scored
+		dataType: int64
+		formatString: 0
+		lineageTag: 358f772d-df1f-41f5-b8c5-2b5d1c7ffa7d
+		summarizeBy: sum
+		sourceColumn: is_scored
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CustomerSegments = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "rpt", Item = "vw_CustomerSegments"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

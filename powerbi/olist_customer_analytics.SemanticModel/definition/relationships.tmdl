@@ -1,0 +1,85 @@
+relationship 9378d474-8623-4ad6-8e1f-9708497c9f8e
+	fromColumn: DimCustomer.geography_key
+	toColumn: DimGeography.geography_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2b0c70bc-d693-4528-b98b-f1884faeecf2
+	isActive: false
+	fromColumn: DimSeller.geography_key
+	toColumn: DimGeography.geography_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1793d924-b4d1-4fa5-a764-126a5691e943
+	fromColumn: FactOrderItems.customer_key
+	toColumn: DimCustomer.customer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6984aed6-41a0-4dde-bddc-fa1639b64970
+	fromColumn: FactOrderItems.purchase_date_key
+	toColumn: DimDate.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7d4f08e6-bb10-4d20-9a11-4e781613e5c3
+	fromColumn: FactOrderItems.product_key
+	toColumn: DimProduct.product_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9dccfc22-0846-4125-82f2-6b3ff9969d40
+	fromColumn: FactOrderItems.seller_key
+	toColumn: DimSeller.seller_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8f3952db-63b1-40de-924b-be8d4889c35f
+	fromColumn: FactOrders.customer_key
+	toColumn: DimCustomer.customer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1c207d24-d87e-4ea5-babb-960f427c92b6
+	isActive: false
+	fromColumn: FactOrders.delivered_date_key
+	toColumn: DimDate.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2fd07241-988e-4e42-8d36-d4c5d8c01db9
+	isActive: false
+	fromColumn: FactOrders.estimated_date_key
+	toColumn: DimDate.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c994a48b-822f-4da9-89a4-a6e9ac4d75ef
+	fromColumn: FactOrders.purchase_date_key
+	toColumn: DimDate.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 62fab1fa-13db-4306-858d-cb3a98771aee
+	fromColumn: FactPayments.customer_key
+	toColumn: DimCustomer.customer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2e2a16b4-e39f-4990-b5ed-ee5c45095267
+	fromColumn: FactPayments.purchase_date_key
+	toColumn: DimDate.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2ff0a39f-534f-e5f1-ab8d-583c9cfcca82
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: CustomerSegments.customer_key
+	toColumn: DimCustomer.customer_key
+
+relationship b2ecaca5-2018-24a1-f32c-bcc36aaf8604
+	fromColumn: CohortActivity.customer_key
+	toColumn: DimCustomer.customer_key
+

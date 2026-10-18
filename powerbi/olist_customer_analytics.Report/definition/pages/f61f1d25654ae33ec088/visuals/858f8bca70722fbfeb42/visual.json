@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "858f8bca70722fbfeb42",
+  "position": {
+    "x": 20,
+    "y": 900,
+    "z": 5,
+    "height": 150,
+    "width": 1200,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight: Revenue grew ~141% (Jan-Aug 2018 vs. the same months of 2017), driven by order volume, while AOV stayed flat (~136). Within 2018 there is no real growth: monthly revenue stays between ~830K and ~980K.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

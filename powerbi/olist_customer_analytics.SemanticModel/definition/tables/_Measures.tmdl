@@ -1,0 +1,92 @@
+table _Measures
+	lineageTag: f4ca89aa-e9d8-4382-acd5-921434afe823
+
+	measure Revenue = ```
+			
+			        CALCULATE ( SUM ( FactOrders[items_value] ), FactOrders[is_delivered] = TRUE () )
+			```
+		formatString: #,0.00
+		lineageTag: 73f3a739-546d-4e14-a8ea-db6fe947e255
+
+	measure Orders = ```
+			
+			        CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[is_delivered] = TRUE () )
+			```
+		formatString: #,0
+		lineageTag: 17ec42e6-a3a9-44e9-b254-a8fa3f19fd06
+
+	measure AOV = ```
+			
+			        DIVIDE ( [Revenue], [Orders] )
+			```
+		formatString: #,0.00
+		lineageTag: 2580e502-8d1d-40a2-b5c8-f16f9c137eda
+
+	measure Customers = ```
+			
+			        CALCULATE ( DISTINCTCOUNT ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () )
+			```
+		formatString: #,0
+		lineageTag: bbd8ceca-6f06-44e3-8907-ed402fad1230
+
+	measure 'Repeat Customers' = ```
+			
+			        VAR CustomersInContext =
+			            CALCULATETABLE ( VALUES ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () )
+			        RETURN
+			            COUNTROWS ( FILTER ( CustomersInContext, [Orders] >= 2 ) )
+			```
+		formatString: #,0
+		lineageTag: fba6f1ce-0834-4659-b3af-23e19615a83b
+
+	measure 'Repeat Customer %' = ```
+			
+			        DIVIDE ( [Repeat Customers], [Customers] )
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 90fb620d-b343-4f59-8df4-6e15a682f9ff
+
+	measure 'Late Orders' = ```
+			
+			        CALCULATE ( [Orders], FactOrders[is_late] = TRUE () )
+			```
+		formatString: #,0
+		lineageTag: b25abcd9-9002-470b-96db-d659e8231eae
+
+	measure 'Orders with Delivery Date' = ```
+			
+			        CALCULATE ( [Orders], NOT ISBLANK ( FactOrders[is_late] ) )
+			```
+		formatString: #,0
+		lineageTag: c4a2c7ed-029e-4322-896f-a6a21693df16
+
+	measure 'Late Rate %' = ```
+			
+			        DIVIDE ( [Late Orders], [Orders with Delivery Date] )
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 0cf48c7b-e4de-40c8-9e8b-84a947bb50c2
+
+	measure 'Customer Share %' = DIVIDE ( [Customers], CALCULATE ( [Customers], ALL ( CustomerSegments[segment] ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: f28bbf2a-ef26-40e4-ba05-567a60990851
+
+	measure 'Revenue Share %' = DIVIDE ( [Revenue], CALCULATE ( [Revenue], ALL ( CustomerSegments[segment] ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 7a1d89af-2b05-46e6-ad7a-ad155d9304ef
+
+	measure 'Avg Recency (days)' = AVERAGE ( CustomerSegments[recency_days] )
+		formatString: #,0
+		lineageTag: f384056e-ea26-4d77-8e2f-8ab4c417fef2
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

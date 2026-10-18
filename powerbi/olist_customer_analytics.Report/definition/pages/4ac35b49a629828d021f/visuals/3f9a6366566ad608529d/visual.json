@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "3f9a6366566ad608529d",
+  "position": {
+    "x": 20,
+    "y": 910,
+    "z": 5,
+    "height": 150,
+    "width": 1880,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 1: Three one-time, high-value segments (New / At risk / Lost - high value) are 38.3% of customers but 72.5% of revenue - the first target for second-purchase and win-back campaigns.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 2: 'At risk - high value' has the highest late-delivery rate (10.1% vs. 6.8% overall). Late delivery is strongly associated with worse reviews, so on-time delivery is a retention lever (association, not proven causation).",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Insight 3: Only Champions + Loyal (2,015 customers, 2.2%) truly returned, bringing 4.1% of revenue. K-Means confirms recency and spend as the main dimensions, but finds no natural separate groups, so the rule-based segments are used for action.",
+                    "textStyle": {
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

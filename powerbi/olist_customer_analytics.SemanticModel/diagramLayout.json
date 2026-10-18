@@ -1,0 +1,167 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 338.85919855766991,
+            "y": 250.11999387684216
+          },
+          "nodeIndex": "DimCustomer",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 515.40863286294177
+          },
+          "nodeIndex": "DimDate",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 981.92311960690949,
+            "y": 244.02538453204784
+          },
+          "nodeIndex": "DimGeography",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 691.93622987103822,
+            "y": 883.27311954489778
+          },
+          "nodeIndex": "DimProduct",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 981.92288742541893,
+            "y": 605.59425049086826
+          },
+          "nodeIndex": "DimSeller",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1229.905028348237,
+            "y": 883.77025041984848
+          },
+          "nodeIndex": "FactOrderItems",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 693.062435989053,
+            "y": 254.661865745652
+          },
+          "nodeIndex": "FactOrders",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 597.82675533742554,
+            "y": -50
+          },
+          "nodeIndex": "FactPayments",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1463.905028348237,
+            "y": 528.63655977244889
+          },
+          "nodeIndex": "CohortActivity",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1747.905028348237,
+            "y": 466.63655977244889
+          },
+          "nodeIndex": "CustomerSegments",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2031.905028348237,
+            "y": 480.63655977244889
+          },
+          "nodeIndex": "MonthlyKPIs",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2265.905028348237,
+            "y": 564.63655977244889
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "f4ca89aa-e9d8-4382-acd5-921434afe823",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

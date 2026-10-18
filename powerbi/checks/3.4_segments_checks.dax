@@ -1,0 +1,50 @@
+// =========================================================
+// 3.4_segments_checks.dax
+// Run in Power BI Desktop -> DAX query view -> Run
+// Expected values come from data/output/08_ml_views_results.txt
+// =========================================================
+
+// Check 1: segment table (must match SQL result 2 of 08_ml_views)
+// New high-value      14,577  3,898,248.57
+// At risk - high value 14,198  3,748,659.35
+// Lost - high value    6,985  1,932,977.16
+// Hibernating         22,397  1,252,407.04
+// New low-value       21,702  1,205,500.80
+// Lost                11,476    635,819.46
+// Champions            1,061    292,837.30
+// Loyal (returned)       954    253,799.25
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[segment],
+    "Customers", [Customers],
+    "Revenue", [Revenue],
+    "Customer Share %", ROUND ( [Customer Share %] * 100, 2 ),
+    "Revenue Share %", ROUND ( [Revenue Share %] * 100, 2 ),
+    "Avg Recency", ROUND ( [Avg Recency (days)], 1 )
+)
+ORDER BY [Revenue] DESC
+
+// Check 2: totals
+// Expected: shares sum to 100 / 100 | matrix total 93,350 |
+//           top-3 high-value segments = 38.31% customers, 72.46% revenue
+EVALUATE
+VAR Seg =
+    ADDCOLUMNS (
+        VALUES ( CustomerSegments[segment] ),
+        "cs", [Customer Share %],
+        "rs", [Revenue Share %]
+    )
+VAR HighValue =
+    FILTER (
+        Seg,
+        CustomerSegments[segment]
+            IN { "New high-value", "At risk - high value", "Lost - high value" }
+    )
+RETURN
+    ROW (
+        "Sum Customer Share %", ROUND ( SUMX ( Seg, [cs] ) * 100, 2 ),
+        "Sum Revenue Share %", ROUND ( SUMX ( Seg, [rs] ) * 100, 2 ),
+        "Matrix total (customers)", CALCULATE ( [Customers], CustomerSegments[cluster_name] <> BLANK () ),
+        "High-value customers %", ROUND ( SUMX ( HighValue, [cs] ) * 100, 2 ),
+        "High-value revenue %", ROUND ( SUMX ( HighValue, [rs] ) * 100, 2 )
+    )

@@ -1,0 +1,9 @@
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[segment],
+    "customers_via_orders", CALCULATE ( DISTINCTCOUNT ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () ),
+    "revenue_via_orders", CALCULATE ( SUM ( FactOrders[items_value] ), FactOrders[is_delivered] = TRUE () ),
+    "cohort_customers", DISTINCTCOUNT ( CohortActivity[customer_key] ),
+    "scored", SUM ( CustomerSegments[is_scored] )
+)
+ORDER BY [revenue_via_orders] DESC

@@ -15,3 +15,7 @@ desktop.ini
 
 # Query result exports (regenerated anytime)
 data/output/
+
+# Power BI project (PBIP): local cache with data + per-user settings
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

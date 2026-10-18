@@ -1,0 +1,32 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DimCustomer","DimDate","DimGeography","DimProduct","DimSeller","FactOrderItems","FactOrders","FactPayments","CohortActivity","CustomerSegments","MonthlyKPIs","_Measures"]
+
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"dadea1a0-6e7c-41e8-bea1-ad5ca79c8a01","fromColumnLocalLineageTag":"21aefe17-a020-427a-a09d-4c48e08166c9","toTableLocalLineageTag":"ea2ff7fb-3a0b-4960-832d-9690104b78a1","toColumnLocalLineageTag":"6c5c0a64-1421-43ba-9821-ca7f049e9ba2"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"d422d17e-9e7f-490a-ad52-f819c6868498","fromColumnLocalLineageTag":"bae858ef-5f51-449f-9a04-804e182ac258","toTableLocalLineageTag":"ea2ff7fb-3a0b-4960-832d-9690104b78a1","toColumnLocalLineageTag":"6c5c0a64-1421-43ba-9821-ca7f049e9ba2"}},"objectType":"Relationship"}]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table DimCustomer
+ref table DimDate
+ref table DimGeography
+ref table DimProduct
+ref table DimSeller
+ref table FactOrderItems
+ref table FactOrders
+ref table FactPayments
+ref table CohortActivity
+ref table CustomerSegments
+ref table MonthlyKPIs
+ref table _Measures
+
+ref cultureInfo en-US
+

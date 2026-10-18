@@ -1,0 +1,179 @@
+table FactOrders
+	lineageTag: ea2ff7fb-3a0b-4960-832d-9690104b78a1
+
+	column order_id
+		dataType: string
+		lineageTag: 6c5c0a64-1421-43ba-9821-ca7f049e9ba2
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: cd1a71bc-b4dd-48ee-9d72-b1b2d2182632
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: d2219c59-c40c-4f8a-9a9b-9815ee892b21
+		summarizeBy: none
+		sourceColumn: purchase_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column delivered_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 2da78bb1-3953-4aa8-96e2-7cf9d20bd634
+		summarizeBy: sum
+		sourceColumn: delivered_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 38bb3ae0-6196-4672-9b72-a7fa74a87b51
+		summarizeBy: sum
+		sourceColumn: estimated_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: dbec5988-3e06-4bb3-a922-d8d76ca3e248
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_ts
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5c8321c4-fa79-4525-b69c-dfa32d5f5e5b
+		summarizeBy: none
+		sourceColumn: purchase_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_delivered
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: df7b8e4f-f40d-43f4-8f2e-738603e8b80c
+		summarizeBy: none
+		sourceColumn: is_delivered
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_valid_delivery_dates
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3d13ef1a-9ba5-4e03-9bbd-b7df98482828
+		summarizeBy: none
+		sourceColumn: has_valid_delivery_dates
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_count
+		dataType: int64
+		formatString: 0
+		lineageTag: a4888bbf-e9da-4c18-b069-fbb07bec6ecd
+		summarizeBy: sum
+		sourceColumn: item_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column items_value
+		dataType: double
+		lineageTag: 21d747af-33e3-41d1-a0a0-757ab51c4b51
+		summarizeBy: sum
+		sourceColumn: items_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column freight_value
+		dataType: double
+		lineageTag: 4742c6d9-4342-4e9d-b42c-3cb67cf8901a
+		summarizeBy: sum
+		sourceColumn: freight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column payment_value
+		dataType: double
+		lineageTag: 58b0cb89-a6da-4938-8e75-6c90934aeb88
+		summarizeBy: sum
+		sourceColumn: payment_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delivery_days
+		dataType: int64
+		formatString: 0
+		lineageTag: ca7fcf2f-d18b-48e8-96ba-118ac1bb101a
+		summarizeBy: sum
+		sourceColumn: delivery_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_days
+		dataType: int64
+		formatString: 0
+		lineageTag: eabac0c0-1011-430c-a076-3d3827736bfd
+		summarizeBy: sum
+		sourceColumn: estimated_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column delay_days
+		dataType: int64
+		formatString: 0
+		lineageTag: e77f41d4-9520-44ae-a7e0-328142f10fc6
+		summarizeBy: sum
+		sourceColumn: delay_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_late
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 13aaa40a-8b4b-4fea-bdd2-5c7828bf401d
+		summarizeBy: none
+		sourceColumn: is_late
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_score
+		dataType: int64
+		formatString: 0
+		lineageTag: e036ab8f-0fd3-4eef-bf0d-1e1bccc2eb17
+		summarizeBy: sum
+		sourceColumn: review_score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactOrders = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "dw", Item = "FactOrders"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table CohortActivity
+	lineageTag: cae534d9-ea70-463a-9228-89af1b3903c2
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 082b5177-202a-4683-91e2-49a93f36f51f
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cohort_month
+		dataType: string
+		lineageTag: d6dd72ec-8a5e-4481-933c-7dce3d7d50e3
+		summarizeBy: none
+		sourceColumn: cohort_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_month
+		dataType: string
+		lineageTag: 48a47ef0-80d4-4261-9f56-f9331d04b325
+		summarizeBy: none
+		sourceColumn: activity_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 929747e7-4a4e-4793-b38f-53c83856c32c
+		summarizeBy: sum
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CohortActivity = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("localhost\SQLEXPRESS", "OlistDB"),
+				  #"Navigation 1" = Source{[Schema = "rpt", Item = "vw_CohortActivity"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
