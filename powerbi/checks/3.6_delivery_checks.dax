@@ -1,0 +1,52 @@
+// =========================================================
+// 3.6_delivery_checks.dax
+// Run in Power BI Desktop -> DAX query view -> Run
+// Expected values: sql/06_analysis_queries.sql (Olist_04 insights 4-6)
+// =========================================================
+
+// Check 1: overall delivery KPIs
+// Expected: Avg Delivery 12.5 | Avg Estimated 24.4 | Late 6.78% |
+//           Avg delay of late orders 10.6
+EVALUATE
+ROW (
+    "Avg Delivery Days", ROUND ( [Avg Delivery Days], 1 ),
+    "Avg Estimated Days", ROUND ( [Avg Estimated Days], 1 ),
+    "Late %", ROUND ( [Late Rate %] * 100, 2 ),
+    "Avg Delay Late (days)", ROUND ( [Avg Delay of Late Orders (days)], 1 ),
+    "Avg Review Score", ROUND ( [Avg Review Score], 2 )
+)
+
+// Check 2: late vs on time
+// Expected: Late 2.27 / 62.4% bad | On time 4.29 / 9.3% bad
+EVALUATE
+SUMMARIZECOLUMNS (
+    FactOrders[Delivery Status],
+    "Orders", [Orders],
+    "Avg Review", ROUND ( [Avg Review Score], 2 ),
+    "Bad Review %", ROUND ( [Bad Review %] * 100, 1 )
+)
+
+// Check 3: delay buckets (sum of orders must equal Late + On time from check 2)
+EVALUATE
+SUMMARIZECOLUMNS (
+    FactOrders[Delay Bucket Order],
+    FactOrders[Delay Bucket],
+    "Orders", [Orders],
+    "Avg Review", ROUND ( [Avg Review Score], 2 ),
+    "Bad Review %", ROUND ( [Bad Review %] * 100, 1 )
+)
+ORDER BY FactOrders[Delay Bucket Order]
+
+// Check 4: late rate for the 12 largest states
+// Expected: RJ 12.1% | SP 4.5% | BA 12.2%
+EVALUATE
+TOPN (
+    12,
+    SUMMARIZECOLUMNS (
+        DimCustomer[state],
+        "Orders", [Orders],
+        "Late %", ROUND ( [Late Rate %] * 100, 1 )
+    ),
+    [Orders], DESC
+)
+ORDER BY [Orders] DESC

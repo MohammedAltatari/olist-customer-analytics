@@ -60,7 +60,5 @@ table DimCustomer
 				in
 				  #"Navigation 1"
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
 

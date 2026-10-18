@@ -120,6 +120,31 @@ table _Measures
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: e4d9c1be-8504-4e89-bf93-0736b6e5d56e
 
+	measure 'Avg Review Score' = CALCULATE ( AVERAGE ( FactOrders[review_score] ), FactOrders[is_delivered] = TRUE () )
+		formatString: 0.00
+		lineageTag: fadc8541-4593-4ddd-b73c-6a016e07574a
+
+	measure 'Bad Review %' =
+			// share of reviews with 1-2 stars (delivered orders with a review)
+			DIVIDE (
+			    CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[is_delivered] = TRUE (), FactOrders[review_score] <= 2, NOT ISBLANK ( FactOrders[review_score] ) ),
+			    CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[is_delivered] = TRUE (), NOT ISBLANK ( FactOrders[review_score] ) )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 8aced078-5d32-4c57-81f9-9329fa31da02
+
+	measure 'Avg Delivery Days' = CALCULATE ( AVERAGE ( FactOrders[delivery_days] ), FactOrders[is_delivered] = TRUE () )
+		formatString: 0.0
+		lineageTag: ed4efcf7-6654-40a9-9abb-945494ff667b
+
+	measure 'Avg Estimated Days' = CALCULATE ( AVERAGE ( FactOrders[estimated_days] ), FactOrders[is_delivered] = TRUE () )
+		formatString: 0.0
+		lineageTag: ea5d5eb1-add3-4392-bc53-06648d51c74f
+
+	measure 'Avg Delay of Late Orders (days)' = CALCULATE ( AVERAGE ( FactOrders[delay_days] ), FactOrders[is_delivered] = TRUE (), FactOrders[is_late] = TRUE () )
+		formatString: 0.0
+		lineageTag: dce79c70-7127-470a-b6a0-9636429da532
+
 	partition _Measures = m
 		mode: import
 		source =
