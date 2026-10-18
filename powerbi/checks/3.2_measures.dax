@@ -1,0 +1,116 @@
+// =========================================================
+// 3.2_measures.dax
+// Core DAX measures + checks against SQL (rpt.vw_MonthlyKPIs)
+//
+// How to use (Power BI Desktop -> DAX query view):
+//   1) Paste this whole file into a new query tab -> Run
+//   2) Check the results (expected values below)
+//   3) Click "Update model with changes" -> the 9 measures
+//      are added to the '_Measures' table
+//
+// Business rules (same as SQL):
+//   - delivered orders only (is_delivered = TRUE)
+//   - revenue = items_value (product prices, no freight)
+//   - customer = customer_key (customer_unique_id)
+// =========================================================
+
+DEFINE
+    // ---------- Sales ----------
+    MEASURE '_Measures'[Revenue] =
+        CALCULATE ( SUM ( FactOrders[items_value] ), FactOrders[is_delivered] = TRUE () )
+
+    MEASURE '_Measures'[Orders] =
+        CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[is_delivered] = TRUE () )
+
+    MEASURE '_Measures'[AOV] =
+        DIVIDE ( [Revenue], [Orders] )
+
+    // ---------- Customers ----------
+    MEASURE '_Measures'[Customers] =
+        CALCULATE ( DISTINCTCOUNT ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () )
+
+    // Customers with 2+ delivered orders INSIDE the current filter (period, segment, state...)
+    MEASURE '_Measures'[Repeat Customers] =
+        VAR CustomersInContext =
+            CALCULATETABLE ( VALUES ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () )
+        RETURN
+            COUNTROWS ( FILTER ( CustomersInContext, [Orders] >= 2 ) )
+
+    MEASURE '_Measures'[Repeat Customer %] =
+        DIVIDE ( [Repeat Customers], [Customers] )
+
+    // ---------- Delivery ----------
+    MEASURE '_Measures'[Late Orders] =
+        CALCULATE ( [Orders], FactOrders[is_late] = TRUE () )
+
+    // Denominator: delivered orders that have valid delivery dates (is_late not blank)
+    MEASURE '_Measures'[Orders with Delivery Date] =
+        CALCULATE ( [Orders], NOT ISBLANK ( FactOrders[is_late] ) )
+
+    MEASURE '_Measures'[Late Rate %] =
+        DIVIDE ( [Late Orders], [Orders with Delivery Date] )
+
+// ---------------------------------------------------------
+// Check 1: grand totals
+// Expected: Revenue 13,220,248.93 | Orders 96,470 | AOV 137.04
+//           Customers 93,350 | Repeat 2,801 | Repeat % 3.0% | Late % ~6.8%
+// ---------------------------------------------------------
+EVALUATE
+ROW (
+    "Revenue", [Revenue],
+    "Orders", [Orders],
+    "AOV", ROUND ( [AOV], 2 ),
+    "Customers", [Customers],
+    "Repeat Customers", [Repeat Customers],
+    "Repeat %", ROUND ( [Repeat Customer %] * 100, 2 ),
+    "Late %", ROUND ( [Late Rate %] * 100, 2 )
+)
+
+// ---------------------------------------------------------
+// Check 2: month by month vs SQL view rpt.vw_MonthlyKPIs
+// Expected: every *_mismatch column = 0
+// ---------------------------------------------------------
+EVALUATE
+VAR Compare =
+    ADDCOLUMNS (
+        MonthlyKPIs,
+        "d_revenue",
+            VAR m = MonthlyKPIs[purchase_month]
+            RETURN CALCULATE ( [Revenue], DimDate[year_month] = m ) - MonthlyKPIs[revenue],
+        "d_orders",
+            VAR m = MonthlyKPIs[purchase_month]
+            RETURN CALCULATE ( [Orders], DimDate[year_month] = m ) - MonthlyKPIs[orders],
+        "d_customers",
+            VAR m = MonthlyKPIs[purchase_month]
+            RETURN CALCULATE ( [Customers], DimDate[year_month] = m ) - MonthlyKPIs[customers],
+        "d_aov",
+            VAR m = MonthlyKPIs[purchase_month]
+            RETURN ROUND ( CALCULATE ( [AOV], DimDate[year_month] = m ), 2 ) - MonthlyKPIs[avg_order_value],
+        "d_late",
+            VAR m = MonthlyKPIs[purchase_month]
+            RETURN ROUND ( CALCULATE ( [Late Rate %], DimDate[year_month] = m ) * 100, 1 ) - MonthlyKPIs[late_rate_pct]
+    )
+RETURN
+    ROW (
+        "months", COUNTROWS ( Compare ),
+        "revenue_mismatch",   COUNTROWS ( FILTER ( Compare, ABS ( [d_revenue] ) > 0.005 ) ) + 0,
+        "orders_mismatch",    COUNTROWS ( FILTER ( Compare, [d_orders] <> 0 ) ) + 0,
+        "customers_mismatch", COUNTROWS ( FILTER ( Compare, [d_customers] <> 0 ) ) + 0,
+        "aov_mismatch",       COUNTROWS ( FILTER ( Compare, ABS ( [d_aov] ) > 0.005 ) ) + 0,
+        "late_mismatch",      COUNTROWS ( FILTER ( Compare, ABS ( [d_late] ) > 0.05 ) ) + 0
+    )
+
+// ---------------------------------------------------------
+// Check 3: measures by segment (Repeat % should be 100% for
+// Champions and Loyal, ~0% for the "New" segments)
+// ---------------------------------------------------------
+EVALUATE
+SUMMARIZECOLUMNS (
+    CustomerSegments[segment],
+    "Customers", [Customers],
+    "Revenue", [Revenue],
+    "AOV", ROUND ( [AOV], 2 ),
+    "Repeat %", ROUND ( [Repeat Customer %] * 100, 1 ),
+    "Late %", ROUND ( [Late Rate %] * 100, 1 )
+)
+ORDER BY [Revenue] DESC
