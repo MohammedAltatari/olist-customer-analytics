@@ -1,0 +1,34 @@
+// =========================================================
+// 3.5_cohort_checks.dax
+// Run in Power BI Desktop -> DAX query view -> Run
+// Expected values: sql/07_views.sql preview + Olist_04 insights
+// =========================================================
+
+// Check 1: totals
+// Expected: Returning Customers 2,015 | Returning % 2.16 |
+//           Repeat Customers 2,801 (difference 786) |
+//           Cohort customers 93,350 | Sum of cohort sizes 93,350
+EVALUATE
+ROW (
+    "Returning Customers", [Returning Customers],
+    "Returning %", ROUND ( [Returning Customer %] * 100, 2 ),
+    "Repeat Customers", [Repeat Customers],
+    "Same-day only (difference)", [Repeat Customers] - [Returning Customers],
+    "Cohort customers", DISTINCTCOUNT ( CohortActivity[customer_key] ),
+    "Sum of cohort sizes", SUMX ( VALUES ( CohortActivity[cohort_month] ), [Cohort Size] ),
+    "Month-1 Retention %", ROUND ( [Month-1 Retention %] * 100, 2 )
+)
+
+// Check 2: cohort matrix, first 4 months
+// Expected (from 07_views preview): 2017-11 -> size 7,059, month 1 = 40 (0.57%)
+EVALUATE
+SUMMARIZECOLUMNS (
+    CohortActivity[cohort_month],
+    FILTER ( ALL ( CohortActivity[cohort_month] ), CohortActivity[cohort_month] >= "2017-01" ),
+    "Cohort Size", [Cohort Size],
+    "M1 customers", CALCULATE ( [Cohort Active Customers], CohortActivity[month_number] = 1 ),
+    "M1 %", ROUND ( CALCULATE ( [Retention %], CohortActivity[month_number] = 1 ) * 100, 2 ),
+    "M2 %", ROUND ( CALCULATE ( [Retention %], CohortActivity[month_number] = 2 ) * 100, 2 ),
+    "M3 %", ROUND ( CALCULATE ( [Retention %], CohortActivity[month_number] = 3 ) * 100, 2 )
+)
+ORDER BY CohortActivity[cohort_month]

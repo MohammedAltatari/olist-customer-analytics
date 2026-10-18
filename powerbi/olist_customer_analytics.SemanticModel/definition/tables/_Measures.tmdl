@@ -79,6 +79,47 @@ table _Measures
 		formatString: #,0
 		lineageTag: f384056e-ea26-4d77-8e2f-8ab4c417fef2
 
+	measure 'Returning Customers' =
+			// customers with delivered orders on 2+ different purchase days
+			VAR CustomersInContext =
+			    CALCULATETABLE ( VALUES ( FactOrders[customer_key] ), FactOrders[is_delivered] = TRUE () )
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            CustomersInContext,
+			            CALCULATE ( DISTINCTCOUNT ( FactOrders[purchase_date_key] ), FactOrders[is_delivered] = TRUE () ) >= 2
+			        )
+			    )
+		formatString: #,0
+		lineageTag: 7f39d9a2-bbf1-4b4a-8873-1396bf3a8642
+
+	measure 'Returning Customer %' = DIVIDE ( [Returning Customers], [Customers] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5774a721-b05a-42d8-9698-a6a6259f2dd8
+
+	measure 'Cohort Size' = CALCULATE ( DISTINCTCOUNT ( CohortActivity[customer_key] ), CohortActivity[month_number] = 0 )
+		formatString: #,0
+		lineageTag: 2e876489-afcb-4179-b981-3e398ee6c460
+
+	measure 'Cohort Active Customers' = DISTINCTCOUNT ( CohortActivity[customer_key] )
+		formatString: #,0
+		lineageTag: 2c95cab6-175b-4e81-9138-c4ab897c96f1
+
+	measure 'Retention %' = DIVIDE ( [Cohort Active Customers], [Cohort Size] )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8f8dfd63-9576-4882-94b6-8ea1f3746578
+
+	measure 'Month-1 Retention %' =
+			// weighted month-1 retention, cohorts Jan-2017 to Jul-2018 (Aug-2018 has no month 1 yet)
+			CALCULATE (
+			    [Retention %],
+			    CohortActivity[month_number] = 1,
+			    CohortActivity[cohort_month] >= "2017-01",
+			    CohortActivity[cohort_month] <= "2018-07"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e4d9c1be-8504-4e89-bf93-0736b6e5d56e
+
 	partition _Measures = m
 		mode: import
 		source =

@@ -19,3 +19,5 @@ data/output/
 # Power BI project (PBIP): local cache with data + per-user settings
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+# Old binary Power BI file (project now uses PBIP)
+powerbi/*.pbix
