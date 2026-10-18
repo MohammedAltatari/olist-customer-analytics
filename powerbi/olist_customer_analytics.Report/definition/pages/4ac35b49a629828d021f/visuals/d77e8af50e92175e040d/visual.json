@@ -3,9 +3,9 @@
   "name": "d77e8af50e92175e040d",
   "position": {
     "x": 1480,
-    "y": 10,
+    "y": 14,
     "z": 1,
-    "height": 70,
+    "height": 68,
     "width": 420,
     "tabOrder": 1
   },
@@ -49,6 +49,7 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {}
   }
 }

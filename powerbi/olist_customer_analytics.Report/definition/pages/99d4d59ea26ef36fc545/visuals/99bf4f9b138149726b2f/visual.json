@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "99bf4f9b138149726b2f",
   "position": {
-    "x": 20,
-    "y": 15,
+    "x": 106,
+    "y": 10,
     "z": 0,
-    "height": 65,
-    "width": 1440,
+    "height": 78,
+    "width": 1360,
     "tabOrder": 0
   },
   "visual": {
@@ -21,8 +21,27 @@
                   {
                     "value": "Second Purchase - Who to Target Next?",
                     "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "24pt"
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "24pt",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Model-ranked list of current customers and return rate by category   |   ",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#BFD7EE"
+                    }
+                  },
+                  {
+                    "value": "Olist e-commerce, Brazil",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#F28C38"
                     }
                   }
                 ]

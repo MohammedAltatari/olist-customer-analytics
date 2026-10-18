@@ -3,9 +3,9 @@
   "name": "5af7e4d636baa1105246",
   "position": {
     "x": 20,
-    "y": 90,
+    "y": 106,
     "z": 2,
-    "height": 130,
+    "height": 110,
     "width": 1880,
     "tabOrder": 2
   },
@@ -89,6 +89,21 @@
         }
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

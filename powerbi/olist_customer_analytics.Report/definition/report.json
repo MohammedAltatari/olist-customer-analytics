@@ -9,6 +9,15 @@
         "page": "2.3.1"
       },
       "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "OlistBlue.json",
+      "reportVersionAtImport": {
+        "visual": "2.13.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
     }
   },
   "objects": {
@@ -48,6 +57,42 @@
           "name": "Fluent2-CY26SU09",
           "path": "BaseThemes/Fluent2-CY26SU09.json",
           "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "OlistBlue.json",
+          "path": "OlistBlue.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "bg_overview.png",
+          "path": "bg_overview.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_segments.png",
+          "path": "bg_segments.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_cohort.png",
+          "path": "bg_cohort.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_delivery.png",
+          "path": "bg_delivery.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_second.png",
+          "path": "bg_second.png",
+          "type": "Image"
         }
       ]
     }

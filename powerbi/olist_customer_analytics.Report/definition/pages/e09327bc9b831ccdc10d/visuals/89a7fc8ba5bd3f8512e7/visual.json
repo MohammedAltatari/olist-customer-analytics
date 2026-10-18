@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "89a7fc8ba5bd3f8512e7",
   "position": {
-    "x": 20,
+    "x": 78,
     "y": 900,
     "z": 5,
-    "height": 160,
-    "width": 1880,
+    "height": 125,
+    "width": 1814,
     "tabOrder": 5
   },
   "visual": {
@@ -21,7 +21,8 @@
                   {
                     "value": "Insight 1: Retention is extremely low - in every monthly cohort fewer than 1% of new customers buy again in the next month (e.g. Nov-2017: 7,059 new customers, only 40 returned in month 1 = 0.6%).",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -31,7 +32,8 @@
                   {
                     "value": "Insight 2: Only 2,015 customers (2.2%) ever returned on a different day. 'Repeat by orders' (3.0%) overstates loyalty, because ~786 customers placed two orders on the same day.",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -41,7 +43,8 @@
                   {
                     "value": "Insight 3: Retention did not improve as the store grew, so growth came only from acquiring new customers - retention is the main untapped growth lever.",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]

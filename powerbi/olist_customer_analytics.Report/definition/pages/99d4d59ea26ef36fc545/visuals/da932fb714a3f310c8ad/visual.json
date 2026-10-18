@@ -3,9 +3,9 @@
   "name": "da932fb714a3f310c8ad",
   "position": {
     "x": 660,
-    "y": 100,
+    "y": 110,
     "z": 3,
-    "height": 300,
+    "height": 290,
     "width": 1240,
     "tabOrder": 3
   },
@@ -22,7 +22,8 @@
                     "value": "How reliable is the model?",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "fontWeight": "bold"
+                      "fontWeight": "bold",
+                      "color": "#F28C38"
                     }
                   }
                 ]
@@ -32,7 +33,8 @@
                   {
                     "value": "- Random Forest trained on 2017, tested once on Jan-Mar 2018: ROC-AUC 0.55 (95% CI 0.51-0.59) - only slightly better than random.",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -42,7 +44,8 @@
                   {
                     "value": "- Useful only for ranking: the top 5% (Group A) returned ~1.8x more often than average (lift 1.8).",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -52,7 +55,8 @@
                   {
                     "value": "- Scores are inflated by class weights (average 0.26-0.49 vs. a real return rate of ~1.3%), so this page shows the rank and group, never a probability.",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -63,7 +67,8 @@
                     "value": "- Decisions should rely on rules (segment, category, delivery) - the model only helps decide who to contact first.",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "fontWeight": "bold"
+                      "fontWeight": "bold",
+                      "color": "#F28C38"
                     }
                   }
                 ]

@@ -3,9 +3,9 @@
   "name": "cfb7315640c1e72c8310",
   "position": {
     "x": 20,
-    "y": 100,
+    "y": 110,
     "z": 2,
-    "height": 300,
+    "height": 290,
     "width": 620,
     "tabOrder": 2
   },
@@ -77,6 +77,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

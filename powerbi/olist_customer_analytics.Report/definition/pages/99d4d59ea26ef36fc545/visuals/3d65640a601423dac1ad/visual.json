@@ -98,7 +98,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of customers who returned, by category bought (15 largest categories)'"
+                  "Value": "'Share of customers who returned (any later purchase), by category bought - 15 largest categories'"
                 }
               }
             }

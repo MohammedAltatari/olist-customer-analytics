@@ -70,7 +70,30 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top 10 states by revenue'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {}
   },
   "filterConfig": {
     "filters": [

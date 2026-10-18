@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "bff839f1a11072eee206",
   "position": {
-    "x": 20,
+    "x": 78,
     "y": 900,
     "z": 6,
-    "height": 160,
-    "width": 1880,
+    "height": 125,
+    "width": 1814,
     "tabOrder": 6
   },
   "visual": {
@@ -19,9 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Insight 1: Product category is the clearest signal of a second purchase - in the model data, first orders in sports_leisure return at 2.08% vs. 0.67% for auto (~3x).",
+                    "value": "Insight 1: Return rates differ ~2x by category (furniture_decor 4.7%, bed_bath_table 4.4% vs. cool_stuff 2.5%). This chart counts any purchase in the category; the model data (first-order category, return on day 31-180) shows a stronger gap: sports_leisure 2.08% vs. auto 0.67% (~3x).",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -31,7 +32,8 @@
                   {
                     "value": "Insight 2: 30,469 current customers have not returned yet; Group A (1,523) is the first list for a second-purchase offer, followed by Group B (4,570).",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]
@@ -41,7 +43,8 @@
                   {
                     "value": "Insight 3: The biggest levers are operational - contact customers in the first 30 days after delivery and make sure their first order arrives on time.",
                     "textStyle": {
-                      "fontSize": "14pt"
+                      "fontSize": "14pt",
+                      "color": "#33475B"
                     }
                   }
                 ]

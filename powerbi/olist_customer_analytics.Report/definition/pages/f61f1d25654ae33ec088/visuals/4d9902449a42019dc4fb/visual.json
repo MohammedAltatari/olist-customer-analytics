@@ -3,9 +3,9 @@
   "name": "4d9902449a42019dc4fb",
   "position": {
     "x": 1480,
-    "y": 10,
+    "y": 14,
     "z": 3,
-    "height": 70,
+    "height": 68,
     "width": 420,
     "tabOrder": 3
   },
@@ -62,7 +62,8 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {}
   },
   "filterConfig": {
     "filters": [
